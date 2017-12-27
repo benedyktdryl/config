@@ -1,0 +1,28 @@
+{
+  "name": "config",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:watch": "node scripts/build.js -w",
+    "test":
+      "NODE_APP_INSTANCE=tsinstance APP_COUCHDB_DEFAULT_CONNECTION_PASSWORD=secretpassword APP_COUCHDB_DEFAULT_CONNECTION_RETRIES=10 APP_COUCHDB_DEFAULT_CONNECTION_KEEP_ALIVE=false node packages/preset-node-config/dist/index.js",
+    "test:watch":
+      "NODE_APP_INSTANCE=tsinstance APP_COUCHDB_DEFAULT_CONNECTION_PASSWORD=secretpassword APP_COUCHDB_DEFAULT_CONNECTION_RETRIES=10 APP_COUCHDB_DEFAULT_CONNECTION_KEEP_ALIVE=false nodemon packages/preset-node-config/dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chalk": "2.3.0",
+    "cli-table2": "0.2.0",
+    "glob": "7.1.2",
+    "lerna": "2.5.1",
+    "nodemon": "1.14.3",
+    "shelljs": "0.7.8",
+    "typescript": "2.6.2",
+    "yargs": "10.0.3"
+  },
+  "workspaces": ["packages/*"],
+  "private": true
+}

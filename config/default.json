@@ -1,0 +1,7 @@
+{
+  "database": {
+    "couchdb": {
+      "connections": [{ "host": "localhost" }]
+    }
+  }
+}

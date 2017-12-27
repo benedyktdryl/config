@@ -1,0 +1,4 @@
+UNEXISTING_VALUE: "unexisting.path"
+APP_COUCHDB_DEFAULT_CONNECTION_PASSWORD: "database.couchdb.connections[0].password"
+APP_COUCHDB_DEFAULT_CONNECTION_RETRIES: "database.couchdb.connections[0].config.retries"
+APP_COUCHDB_DEFAULT_CONNECTION_KEEP_ALIVE: "database.couchdb.connections[0].config.keepAlive"

@@ -1,0 +1,22 @@
+{
+  "name": "@config/preset-node-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@config/config": "^1.0.0",
+    "@config/handler-js": "^1.0.0",
+    "@config/handler-ts": "^1.0.0",
+    "@config/handler-json": "^1.0.0",
+    "@config/handler-yaml": "^1.0.0",
+    "@config/provider-env-files": "^1.0.0",
+    "@config/provider-env-variables": "^1.0.0",
+    "@types/node": "^8.5.2"
+  }
+}

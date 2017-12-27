@@ -1,0 +1,17 @@
+{
+  "name": "@config/handler-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "7.0.0-beta.35",
+    "@babel/preset-es2015": "7.0.0-beta.35",
+    "lodash.merge": "4.6.0"
+  }
+}
