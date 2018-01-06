@@ -73,7 +73,7 @@ export class ProviderEnvVariables {
     const variablesMap = variables || (await this.getVariablesMap());
 
     const config = Object.entries(variablesMap).reduce(
-      (partialConfig, [name, path]) => {
+      (partialConfig, [path, name]) => {
         const value = env[name];
 
         if (value) {
