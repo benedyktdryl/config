@@ -5,10 +5,11 @@ import { Config } from "@config/config";
 import { ProviderEnvFiles } from "@config/provider-env-files";
 import { ProviderEnvVariables } from "@config/provider-env-variables";
 
-import { HandlerJS } from "@config/handler-js";
 import { HandlerJSON } from "@config/handler-json";
 import { HandlerYaml } from "@config/handler-yaml";
-import { HandlerTS } from "@config/handler-ts";
+
+import { postDeferred } from "@config/post-deferred";
+import { postJoiValidate, Joi } from "@config/post-joi-validate";
 
 /**
  * Bare metal usage example
@@ -16,33 +17,32 @@ import { HandlerTS } from "@config/handler-ts";
 const providerEnvFiles = new ProviderEnvFiles();
 const providerEnvVariables = new ProviderEnvVariables();
 
-const handlerJS = new HandlerJS({});
 const handlerJSON = new HandlerJSON();
 const handlerYaml = new HandlerYaml();
-const handlerTS = new HandlerTS();
 
 const basePath = "config";
-const handlers = [handlerJSON, handlerJS, handlerYaml, handlerTS];
+const handlers = [handlerJSON, handlerYaml];
 const providers = [providerEnvFiles, providerEnvVariables];
+
+const hooks = [
+  postDeferred({
+    "database.couchdb.connections[0].password": password => `${password} 😊`
+  }),
+  postJoiValidate(
+    Joi.object().keys({
+      keyToThrow: Joi.string().required()
+    })
+  )
+];
 
 (async () => {
   try {
-    const config = new Config({ handlers, providers, basePath });
+    const config = new Config({ handlers, providers, hooks, basePath });
     // await, as it's asynchronous
     await config.init();
 
     console.log(
       inspect(config.get("database.couchdb"), {
-        showHidden: false,
-        depth: null
-      }),
-
-      inspect(config.get("superUser"), {
-        showHidden: false,
-        depth: null
-      }),
-
-      inspect(config.get("presentTS"), {
         showHidden: false,
         depth: null
       })
