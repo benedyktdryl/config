@@ -7,6 +7,8 @@ export interface Handler {
   get(): object;
 }
 
+export type Hook = (config: object) => object;
+
 export interface ProviderProps {
   cwd: string;
   formats: string[];
@@ -29,6 +31,11 @@ export class Config {
   private config;
 
   /**
+   * Store callbacks which will process composed config
+   */
+  private hooks: Hook[];
+
+  /**
    * Props to be injected into every provider
    */
   private providerProps: ProviderProps = {
@@ -36,6 +43,14 @@ export class Config {
     formats: [],
     handlers: {}
   };
+
+  /**
+   * Wrap in resolved promise if value is not wrapped already
+   */
+  private toPromise = value => (value.then ? value : Promise.resolve(value));
+
+  private applyHook = async (config, hook) =>
+    await this.toPromise(hook(config));
 
   /**
    * Handlers need to be accessed by formats they are handling
@@ -57,7 +72,8 @@ export class Config {
     this.providerProps = { cwd, handlers, formats };
   }
 
-  public constructor({ handlers, providers, basePath }) {
+  public constructor({ handlers, providers, hooks, basePath }) {
+    this.hooks = hooks;
     this.providers = providers;
 
     this.setProviderProps({ basePath, handlers });
@@ -72,7 +88,10 @@ export class Config {
       })
     );
 
-    this.config = providedValues.reduce(merge, {});
+    this.config = await this.hooks.reduce(
+      this.applyHook,
+      providedValues.reduce(merge, {})
+    );
   }
 
   public get(path) {
