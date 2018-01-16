@@ -6,7 +6,7 @@ import { ProviderEnvFiles } from "@config/provider-env-files";
 import { ProviderEnvVariables } from "@config/provider-env-variables";
 
 import { HandlerJSON } from "@config/handler-json";
-import { HandlerYaml } from "@config/handler-yaml";
+import { HandlerYAML } from "@config/handler-yaml";
 
 import { postDeferred } from "@config/post-deferred";
 import { postJoiValidate, Joi } from "@config/post-joi-validate";
@@ -18,10 +18,10 @@ const providerEnvFiles = new ProviderEnvFiles();
 const providerEnvVariables = new ProviderEnvVariables();
 
 const handlerJSON = new HandlerJSON();
-const handlerYaml = new HandlerYaml();
+const handlerYAML = new HandlerYAML();
 
 const basePath = "config";
-const handlers = [handlerJSON, handlerYaml];
+const handlers = [handlerJSON, handlerYAML];
 const providers = [providerEnvFiles, providerEnvVariables];
 
 const hooks = [

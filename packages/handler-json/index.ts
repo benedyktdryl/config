@@ -7,10 +7,10 @@ export class HandlerJSON {
 
       // https://stackoverflow.com/a/20392392
       if (parsedContent && typeof parsedContent === "object") {
-        return parsedContent;
+        return Promise.resolve(parsedContent);
       }
     } catch (e) {
-      return {};
+      return Promise.resolve({});
     }
 
     return {};
